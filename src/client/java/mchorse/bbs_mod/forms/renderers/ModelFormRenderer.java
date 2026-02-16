@@ -23,10 +23,6 @@ import mchorse.bbs_mod.forms.entities.StubEntity;
 import mchorse.bbs_mod.forms.forms.BodyPart;
 import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.forms.forms.ModelForm;
-import mchorse.bbs_mod.film.replays.FormProperties;
-import mchorse.bbs_mod.utils.keyframes.KeyframeChannel;
-import mchorse.bbs_mod.utils.keyframes.factories.IKeyframeFactory;
-import mchorse.bbs_mod.utils.keyframes.factories.KeyframeFactories;
 import mchorse.bbs_mod.forms.renderers.utils.MatrixCache;
 import mchorse.bbs_mod.forms.renderers.utils.MatrixCacheEntry;
 import mchorse.bbs_mod.resources.Link;
@@ -54,7 +50,6 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Matrix4f;
-import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -77,14 +72,6 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
     private ModelInstance lastModel;
 
     private IEntity entity = new StubEntity();
-
-    public FormProperties properties;
-    public float time;
-
-    private FormProperties lastProperties;
-    private int lastPropertiesSignature;
-    private int lastPropertiesNonEmpty = -1;
-    private List<PropertyAccessor> propertyAccessors = new ArrayList<>();
 
     @Override
     protected void applyTransforms(MatrixStack stack, boolean origin, float transition)
@@ -165,18 +152,10 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
             this.applyPose(pose, newPose.get());
         }
 
-        if (this.properties != null)
-        {
-            this.applyProperties(pose, this.properties);
-        }
-        else if (this.form.properties != null)
-        {
-            this.applyProperties(pose, this.form.properties);
-        }
-
         return pose;
     }
 
+<<<<<<< HEAD
     private void applyProperties(Pose pose, FormProperties properties)
     {
         int signature = 1;
@@ -392,6 +371,8 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
         TRANSLATE, SCALE, ROTATE, ROTATE2
     }
 
+=======
+>>>>>>> parent of 9613e00a (feat: add per-bone property animation system for model forms)
     private void applyPose(Pose targetPose, Pose pose)
     {
         for (Map.Entry<String, PoseTransform> entry : pose.transforms.entrySet())
